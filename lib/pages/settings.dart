@@ -7,6 +7,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  // aller chercher les durées en mémoire
   List<Duration> durations = [
     Duration(seconds: 25),
     Duration(seconds: 60),
@@ -17,6 +18,7 @@ class _SettingsState extends State<Settings> {
   ];
 
   bool checkboxVibrate = false;
+  bool checkboxAudioFocus = false;
 
   // createDialog(BuildContext context) {
   //   return showDialog(
@@ -110,7 +112,7 @@ class _SettingsState extends State<Settings> {
                           Text(
                             'Faire vibrer à la fin du minuteur',
                             style:
-                                TextStyle(fontSize: 16, color: Colors.white70),
+                                TextStyle(fontSize: 14, color: Colors.white70),
                           ),
                         ],
                       ),
@@ -123,6 +125,96 @@ class _SettingsState extends State<Settings> {
                               checkboxVibrate = checkboxChanged;
                             });
                           })
+                    ],
+                  )),
+            ),
+            Container(
+              height: 95,
+              margin: EdgeInsets.fromLTRB(0, 2, 0, 0),
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[800],
+                    alignment: Alignment.centerLeft,
+                    fixedSize: Size.infinite),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: Text(
+                              'Audio focus',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: Text(
+                              'Abaisse les autres sons lorsque \nl\'application sonne.',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.white70),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Checkbox(
+                          value: checkboxAudioFocus,
+                          activeColor: Colors.grey[850],
+                          checkColor: Colors.amber[300],
+                          onChanged: (bool checkboxChanged) {
+                            setState(() {
+                              checkboxAudioFocus = checkboxChanged;
+                            });
+                          })
+                    ]),
+              ),
+            ),
+            Container(
+              height: 80,
+              margin: EdgeInsets.fromLTRB(0, 2, 0, 0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                              content: ListTile(
+                                
+                              ),
+                              actions: []);
+                        });
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[800],
+                      alignment: Alignment.centerLeft,
+                      fixedSize: Size.infinite),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: Text(
+                              '[son]', // charger le bruit actuel
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Text(
+                            'Choisir le son',
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.white70),
+                          ),
+                        ],
+                      ),
                     ],
                   )),
             )
